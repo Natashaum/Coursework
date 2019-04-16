@@ -160,6 +160,77 @@ void PrintAddress(Address* data) {
 	}
 	}
 	
+void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (для використання у ф-ях сортування)
+{
+	Address tempData;
+
+	tempData.city = data1.city;
+	tempData.district = data1.district;
+	tempData.street = data1.street;
+	tempData.houseNumber = data1.houseNumber;
+	tempData.flatNumber = data1.flatNumber;
+	tempData.roomsAmount = data1.roomsAmount;
+	tempData.area = data1.area;
+	tempData.floor = data1.floor;
+	tempData.telNumber = data1.telNumber;
+	tempData.ownersName = data1.ownersName;
+	tempData.ownersSurname = data1.ownersSurname;
+
+	data1.city = data2.city;
+	data1.district = data2.district;
+	data1.street = data2.street;
+	data1.houseNumber = data2.houseNumber;
+	data1.flatNumber = data2.flatNumber;
+	data1.roomsAmount = data2.roomsAmount;
+	data1.area = data2.area;
+	data1.floor = data2.floor;
+	data1.telNumber = data2.telNumber;
+	data1.ownersName = data2.ownersName;
+	data1.ownersSurname = data2.ownersSurname;
+
+	data2.city = tempData.city;
+	data2.district = tempData.district;
+	data2.street = tempData.street;
+	data2.houseNumber = tempData.houseNumber;
+	data2.flatNumber = tempData.flatNumber;
+	data2.roomsAmount = tempData.roomsAmount;
+	data2.area = tempData.area;
+	data2.floor = tempData.floor;
+	data2.telNumber = tempData.telNumber;
+	data2.ownersName = tempData.ownersName;
+	data2.ownersSurname = tempData.ownersSurname;
+}
+
+void CopyAddress(Address& data1, Address data2) // копіює дані з одної змінної Address в іншу //ф-я для перезаписування(зміни) даних
+{
+	data1.city = data2.city;
+	data1.district = data2.district;
+	data1.street = data2.street;
+	data1.houseNumber = data2.houseNumber;
+	data1.flatNumber = data2.flatNumber;
+	data1.roomsAmount = data2.roomsAmount;
+	data1.area = data2.area;
+	data1.floor = data2.floor;
+	data1.telNumber = data2.telNumber;
+	data1.ownersName = data2.ownersName;
+	data1.ownersSurname = data2.ownersSurname;
+}
+
+void AddNewAddress (Address *&arrData, Address data) // Address *&arrData - вказівник на посилання масиву адрес  // Address data - параметр для введення нової адреси
+{
+	Address* newData = new Address[SIZE + 1];
+	for (int i = 0; i < SIZE; i++)
+	{
+		CopyAddress(newData[i], arrData[i]);
+	}
+	CopyAddress(newData[SIZE], data);
+
+	delete[] arrData;
+	arrData = newData;
+	SIZE++;
+}
+
+
 
 int main() {
 	
@@ -174,6 +245,35 @@ int main() {
 	int floor;
 	FillAddress(data);
 	PrintAddress(data);
+
+	Address tempdata;
+	cout << "Enter the name of the city: ";
+	cin >> tempdata.city;
+	cout << "Enter the district: ";
+	cin >> tempdata.district;
+	cout << "Enter the street: ";
+	cin >> tempdata.street;
+	cout << "Enter a house Number: ";
+	cin >> tempdata.houseNumber;
+	cout << "Enter flatNumber: ";
+	cin >> tempdata.flatNumber;
+	cout << "Enter rooms Amount: ";
+	cin >> tempdata.roomsAmount;
+	cout << "Enter the area: ";
+	cin >> tempdata.area;
+	cout << "Enter the floor: ";
+	cin >> tempdata.floor;
+	cout << "Enter the Telephone Number: ";
+	cin >> tempdata.telNumber;
+	cout << "Enter the Owner's Name: ";
+	cin >> tempdata.ownersName;
+	cout << "Enter the Owner's Surname: ";
+	cin >> tempdata.ownersSurname;
+	AddNewAddress (data, tempdata);
+	PrintAddress(data);
+
+
+
 	delete[]data;
 	system("pause");
 	return 0;
