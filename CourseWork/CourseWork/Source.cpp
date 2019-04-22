@@ -230,7 +230,23 @@ void AddNewAddress (Address *&arrData, Address data) // Address *&arrData - вказ
 	SIZE++;
 }
 
+void RemoveAddressFromList(Address*& arrData, int index)
+{
+	Address* newData = new Address[SIZE - 1];
 
+	for (int i = 0; i < index; i++)
+	{
+		CopyAddress(newData[i], arrData[i]);
+	}
+	for (int i = index + 1; i < SIZE; i++)
+	{
+		CopyAddress(newData[i - 1], arrData[i]);
+	}
+
+	delete[] arrData;
+	arrData = newData;
+	SIZE--;
+}
 
 int main() {
 	
@@ -272,7 +288,12 @@ int main() {
 	AddNewAddress (data, tempdata);
 	PrintAddress(data);
 
-
+	////////////Remove address////////////
+	int index = 0;
+	cout << " Enter index of data you want to delete:   " << endl;
+	cin >> index;
+	RemoveAddressFromList(data, index);
+	PrintAddress(data);
 
 	delete[]data;
 	system("pause");
