@@ -28,22 +28,24 @@ struct Address {
 	string city;
 	string district;
 	string street;
-    int houseNumber;
+	int houseNumber;
 	int flatNumber;
 	int roomsAmount;
 	int area;
 	int floor;
+	int price;
 	string telNumber;
 	string ownersName;
 	string ownersSurname;
 	void ShowAddress() {
 		cout << "\n City:              " << city << "\n District:          " << district << "\n Street:            " << street << "\n House number:      " << houseNumber;
 		cout << "\n Flat Number:       " << flatNumber << "\n Amount of rooms:   " << roomsAmount << "\n Area:              " << area << "\n Floor:             " << floor;
-		cout << "\n Telephone number:  " << telNumber << "\n Owner:             " << ownersName << "   " << ownersSurname; 
+		cout << "\n Telephone number:  " << telNumber << "\n Price:             " << price << "\n Owner:             " << ownersName << "   " << ownersSurname;
 	}
 };
 
 void FillAddress(Address*& data) {
+	
 	data[0].city = "Rivne";
 	data[0].district = "Northern district";
 	data[0].street = "Shuhevych street ";
@@ -52,6 +54,7 @@ void FillAddress(Address*& data) {
 	data[0].roomsAmount = 1;
 	data[0].area = 40;
 	data[0].floor = 2;
+	data[0].price = 22000;
 	data[0].telNumber = "067-555-45-45";
 	data[0].ownersName = "Bohdan";
 	data[0].ownersSurname = "Burulka";
@@ -64,6 +67,7 @@ void FillAddress(Address*& data) {
 	data[1].roomsAmount = 3;
 	data[1].area = 82;
 	data[1].floor = 5;
+	data[1].price = 32000;
 	data[1].telNumber = "067-444-45-45";
 	data[1].ownersName = "Petryk";
 	data[1].ownersSurname = "Piatochkin";
@@ -76,6 +80,7 @@ void FillAddress(Address*& data) {
 	data[2].roomsAmount = 3;
 	data[2].area = 75;
 	data[2].floor = 3;
+	data[2].price = 34000;
 	data[2].telNumber = "067-545-45-45";
 	data[2].ownersName = "Viktoriia";
 	data[2].ownersSurname = "Barabashka";
@@ -88,6 +93,7 @@ void FillAddress(Address*& data) {
 	data[3].roomsAmount = 1;
 	data[3].area = 40;
 	data[3].floor = 2;
+	data[3].price = 25000;
 	data[3].telNumber = "067-333-11-22";
 	data[3].ownersName = "Anna";
 	data[3].ownersSurname = "Anisimova";
@@ -100,6 +106,7 @@ void FillAddress(Address*& data) {
 	data[4].roomsAmount = 2;
 	data[4].area = 54;
 	data[4].floor = 3;
+	data[4].price = 29000;
 	data[4].telNumber = "067-222-22-22";
 	data[4].ownersName = "Iryna";
 	data[4].ownersSurname = "Pavlova";
@@ -112,6 +119,7 @@ void FillAddress(Address*& data) {
 	data[5].roomsAmount = 2;
 	data[5].area = 48;
 	data[5].floor = 4;
+	data[5].price = 27000;
 	data[5].telNumber = "067-222-11-11";
 	data[5].ownersName = "Myhailo";
 	data[5].ownersSurname = "Kozhumiaka";
@@ -124,6 +132,7 @@ void FillAddress(Address*& data) {
 	data[6].roomsAmount = 2;
 	data[6].area = 50;
 	data[6].floor = 3;
+	data[6].price = 33000;
 	data[6].telNumber = "095-222-22-22";
 	data[6].ownersName = "Lys";
 	data[6].ownersSurname = "Mykyta";
@@ -136,6 +145,7 @@ void FillAddress(Address*& data) {
 	data[7].roomsAmount = 1;
 	data[7].area = 40;
 	data[7].floor = 3;
+	data[7].price = 20000;
 	data[7].telNumber = "050-888-25-25";
 	data[7].ownersName = "Andrii";
 	data[7].ownersSurname = "Velgun";
@@ -148,6 +158,7 @@ void FillAddress(Address*& data) {
 	data[8].roomsAmount = 3;
 	data[8].area = 80;
 	data[8].floor = 4;
+	data[8].price = 35000;
 	data[8].telNumber = "095-222-22-22";
 	data[8].ownersName = "Sophiia";
 	data[8].ownersSurname = "Duma";
@@ -155,11 +166,12 @@ void FillAddress(Address*& data) {
 
 void PrintAddress(Address* data) {
 	for (int i = 0; i < SIZE; i++) {
+		cout << "Index of property [" << i << "]" << endl;
 		data[i].ShowAddress();
 		cout << "\n===============================================" << endl;
 	}
-	}
-	
+}
+
 void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (для використання у ф-ях сортування)
 {
 	Address tempData;
@@ -175,6 +187,7 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	tempData.telNumber = data1.telNumber;
 	tempData.ownersName = data1.ownersName;
 	tempData.ownersSurname = data1.ownersSurname;
+	tempData.price = data1.price;
 
 	data1.city = data2.city;
 	data1.district = data2.district;
@@ -187,6 +200,7 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	data1.telNumber = data2.telNumber;
 	data1.ownersName = data2.ownersName;
 	data1.ownersSurname = data2.ownersSurname;
+	data1.price = data2.price;
 
 	data2.city = tempData.city;
 	data2.district = tempData.district;
@@ -199,6 +213,7 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	data2.telNumber = tempData.telNumber;
 	data2.ownersName = tempData.ownersName;
 	data2.ownersSurname = tempData.ownersSurname;
+	data2.price = tempData.price;
 }
 
 void CopyAddress(Address& data1, Address data2) // копіює дані з одної змінної Address в іншу //ф-я для перезаписування(зміни) даних
@@ -216,7 +231,7 @@ void CopyAddress(Address& data1, Address data2) // копіює дані з одної змінної A
 	data1.ownersSurname = data2.ownersSurname;
 }
 
-void AddNewAddress (Address *&arrData, Address data) // Address *&arrData - вказівник на посилання масиву адрес  // Address data - параметр для введення нової адреси
+void AddNewAddress(Address*& arrData, Address data) // Address *&arrData - вказівник на посилання масиву адрес  // Address data - параметр для введення нової адреси
 {
 	Address* newData = new Address[SIZE + 1];
 	for (int i = 0; i < SIZE; i++)
@@ -247,9 +262,141 @@ void RemoveAddressFromList(Address*& arrData, int index)
 	arrData = newData;
 	SIZE--;
 }
+void EditAddressInformation(Address*& data, int index, Address address)
+{
+	data[index].city = address.city;
+	data[index].district = address.district;
+	data[index].street = address.street;
+	data[index].houseNumber = address.houseNumber;
+	data[index].flatNumber = address.flatNumber;
+	data[index].roomsAmount = address.roomsAmount;
+	data[index].area = address.area;
+	data[index].floor = address.floor;
+	data[index].telNumber = address.telNumber;
+	data[index].ownersName = address.ownersName;
+	data[index].ownersSurname = address.ownersSurname;
+}
+void SortByDistrict(Address*& data)  // Address*& (тип) - посилання на вказівник на структуру // data - масив нерухомості
+{
+	for (int i = 0; i < SIZE - 1; i++) {
+		for (int j = 0; j < SIZE - i - 1; j++)
+		{
+			if (_strcmpi(data[j].district.c_str(), data[j + 1].district.c_str()) > 0) // _strcmpi (вбудована ф-я з бібліотеки) порівнює рядки згідно таблиці ASCII
+																						// c_str (вбудована ф-я з бібліотеки) переводить string в char* (тому що ф-я _strcmpi не приймає string )
+			{
+				SwapData(data[j], data[j + 1]);
+			}
+		}
+	}
+}
+void SortByOwnersSurname(Address*& data)  // Address*& - посилання на вказівник на структуру // data - масив нерухомості
+{
+	for (int i = 0; i < SIZE - 1; i++) {
+		for (int j = 0; j < SIZE - i - 1; j++)
+		{
+			if (_strcmpi(data[j].ownersSurname.c_str(), data[j + 1].ownersSurname.c_str()) > 0) // _strcmpi (вбудована ф-я з бібліотеки) порівнює рядки згідно таблиці ASCII
+																						// c_str (вбудована ф-я з бібліотеки) переводить string в char* (тому що ф-я _strcmpi не приймає string )
+			{
+				SwapData(data[j], data[j + 1]);
+			}
+		}
+	}
+}
 
-int main() {
-	
+void SortByPrice(Address*& data) {
+	for (int i = 0; i < SIZE - 1; i++)
+	{
+		for (int j = 0; j < SIZE - i - 1; j++)
+		{
+			if (data[j].price > data[j + 1].price)
+			{
+				SwapData(data[j], data[j + 1]);
+			}
+		}
+	}
+}
+void SortByArea(Address*& data) {
+	for (int i = 0; i < SIZE - 1; i++)
+	{
+		for (int j = 0; j < SIZE - i - 1; j++)
+		{
+			if (data[j].area > data[j + 1].area)
+			{
+				SwapData(data[j], data[j + 1]);
+			}
+		}
+	}
+}
+void SortByRoomsAmount(Address*& data) {
+	for (int i = 0; i < SIZE - 1; i++)
+	{
+		for (int j = 0; j < SIZE - i - 1; j++)
+		{
+			if (data[j].roomsAmount > data[j + 1].roomsAmount)
+			{
+				SwapData(data[j], data[j + 1]);
+			}
+		}
+	}
+}
+void SearchByDistrict(Address* data, string district)
+{
+	for (int i = 0; i < SIZE; i++) {
+		if (data[i].district.find(district) != string::npos) // Якщо people[i].name не містить name, тоді функція повертає string::npos // find - функція, яка перевіряє наявність строки в строці
+		{
+			data[i].ShowAddress(); 
+		}
+	}
+}
+void SearchByRooms(Address* data, int room)
+{
+	bool isRoom = false;
+	for (int i = 0; i < SIZE; i++) {
+		if (data[i].roomsAmount == room) 
+		{
+			isRoom = true;
+			data[i].ShowAddress();
+			cout << endl << endl;
+		}
+	}
+		if (!isRoom) {
+			cout << " There are no any available " << room << " rooms flats!" << endl;
+		}
+		cout << "----------------------------------------------------" << endl;
+}
+void SearchByFloor(Address* data, int floor)
+{
+	bool isFloor = false;
+	for (int i = 0; i < SIZE; i++) {
+		if (data[i].floor == floor)
+		{
+			isFloor = true;
+			data[i].ShowAddress();
+			cout << endl << endl;
+		}
+	}
+	if (!isFloor) {
+		cout << " There are no any available rooms on" << floor << " flat!" << endl;
+	}
+	cout << "----------------------------------------------------" << endl;
+}
+void AveragePrice(Address* data, int room) {
+	int roomCounter = 0;
+	int priceSum = 0;
+	for (int i = 0; i < SIZE; i++) {
+		if (data[i].roomsAmount == room) {
+			roomCounter++;
+			priceSum += data[i].price;
+		}
+	}
+	cout << " Average Price for " << room << " rooms flat is:   " << priceSum / roomCounter << endl;
+	cout << "----------------------------------------------------" << endl;
+}
+
+void Menu() {
+	enum Choice {
+		FillAndShow = 1, AddNewProperty = 2, DeleteProperty = 3, EditInformation = 4, SortDistrict = 5, SortSurname = 6, SortPrice = 7, SortArea = 8, SearchDistrict = 9, SeachRoomsAmount = 10, SearchFloor = 11, AveragePrices =12, Exit = 0
+	};
 	Address* data = new Address[SIZE];
 	string city;
 	string district;
@@ -259,43 +406,133 @@ int main() {
 	int roomsAmount;
 	int area;
 	int floor;
-	FillAddress(data);
-	PrintAddress(data);
-
-	Address tempdata;
-	cout << "Enter the name of the city: ";
-	cin >> tempdata.city;
-	cout << "Enter the district: ";
-	cin >> tempdata.district;
-	cout << "Enter the street: ";
-	cin >> tempdata.street;
-	cout << "Enter a house Number: ";
-	cin >> tempdata.houseNumber;
-	cout << "Enter flatNumber: ";
-	cin >> tempdata.flatNumber;
-	cout << "Enter rooms Amount: ";
-	cin >> tempdata.roomsAmount;
-	cout << "Enter the area: ";
-	cin >> tempdata.area;
-	cout << "Enter the floor: ";
-	cin >> tempdata.floor;
-	cout << "Enter the Telephone Number: ";
-	cin >> tempdata.telNumber;
-	cout << "Enter the Owner's Name: ";
-	cin >> tempdata.ownersName;
-	cout << "Enter the Owner's Surname: ";
-	cin >> tempdata.ownersSurname;
-	AddNewAddress (data, tempdata);
-	PrintAddress(data);
-
-	////////////Remove address////////////
+	int choice;
+	int room;
+	int price;
 	int index = 0;
-	cout << " Enter index of data you want to delete:   " << endl;
-	cin >> index;
-	RemoveAddressFromList(data, index);
-	PrintAddress(data);
+	cout << " Hello! Our real estate agency is ready to help you if you want to buy property or to sell it!\n " << endl;
+	FillAddress(data);  // Якщо написати за межами циклу, то масив заповнюється автоматично (щоб покеазати інф-ю - треба викликати ф-ю прінт(її викликаємо в циклі коли потрібно))
+	for (;;)
+	{
+		cout << " Press:\n 0 - to Exit!\n 1 - to watch what properties are available\n 2 - to Add New real estate property for sale\n 3 - To Delete real estate property from the list" << endl;
+		cout << " 4 - to Edit Information\n 5 - to Sort by district\n 6 - to Sort by Owner's Surname\n 7 - to Sort by Price\n 8 - to Sort by Area\n 9 - to Search by District\n 10 - to Search by Rooms amount" << endl;
+		cout << " 11 - to Search by floor\n 12 - to know the average price for X-rooms flat" << endl;
+		cin >> choice;
+		Address tempdata;
+		switch (choice) {
+		case Choice::FillAndShow:
+			cout << "Available real estate properties:\n " << endl;
+			cout << "-------------------------------------" << endl;
+			PrintAddress(data);
+			break;
+		case Choice::AddNewProperty:
 
+			cout << "Enter the name of the city: ";
+			cin >> tempdata.city;
+			cout << "Enter the district: ";
+			cin >> tempdata.district;
+			cout << "Enter the street: ";
+			cin >> tempdata.street;
+			cout << "Enter a house Number: ";
+			cin >> tempdata.houseNumber;
+			cout << "Enter flat Number: ";
+			cin >> tempdata.flatNumber;
+			cout << "Enter Amount of rooms: ";
+			cin >> tempdata.roomsAmount;
+			cout << "Enter the area: ";
+			cin >> tempdata.area;
+			cout << "Enter the floor: ";
+			cin >> tempdata.floor;
+			cout << "Enter the Telephone Number: ";
+			cin >> tempdata.telNumber;
+			cout << "Enter the Owner's Name: ";
+			cin >> tempdata.ownersName;
+			cout << "Enter the Owner's Surname: ";
+			cin >> tempdata.ownersSurname;
+			AddNewAddress(data, tempdata);
+			PrintAddress(data); 
+			break;
+		case Choice::DeleteProperty:
+			cout << " Enter index of data you want to delete:   " << endl;
+			cin >> index;
+			RemoveAddressFromList(data, index);
+			PrintAddress(data);
+			break;
+		case Choice::EditInformation:
+			cout << "Enter index of a property you want to edit: ";
+			cin >> index;
+			cout << "Enter the name of the city: ";
+			cin >> tempdata.city;
+			cout << "Enter the district: ";
+			cin >> tempdata.district;
+			cout << "Enter the street: ";
+			cin >> tempdata.street;
+			cout << "Enter a house Number: ";
+			cin >> tempdata.houseNumber;
+			cout << "Enter flat Number: ";
+			cin >> tempdata.flatNumber;
+			cout << "Enter Amount of rooms: ";
+			cin >> tempdata.roomsAmount;
+			cout << "Enter the area: ";
+			cin >> tempdata.area;
+			cout << "Enter the floor: ";
+			cin >> tempdata.floor;
+			cout << "Enter the Telephone Number: ";
+			cin >> tempdata.telNumber;
+			cout << "Enter the Owner's Name: ";
+			cin >> tempdata.ownersName;
+			cout << "Enter the Owner's Surname: ";
+			cin >> tempdata.ownersSurname;
+			EditAddressInformation(data, index, tempdata); // Назва ф-ї і назва еnum не може збігатися!!!
+			PrintAddress(data);
+			break;
+		case Choice::SortDistrict:
+			SortByDistrict(data);
+			PrintAddress(data);
+			break;
+		case Choice::SortSurname:
+			SortByOwnersSurname(data);
+			PrintAddress(data);
+			break;
+		case Choice::SortPrice:
+			SortByPrice(data);
+			PrintAddress(data);
+			break;
+		case Choice::SortArea:
+			SortByArea(data);
+			PrintAddress(data);
+			break;
+		case Choice::SearchDistrict:
+			cout << "Enter the Distric: ";
+			cin >> district;
+			SearchByDistrict(data, district);
+			break;
+		case Choice::SeachRoomsAmount:
+			cout << "Enter Number of Rooms:  ";
+			cin >> room;
+			SearchByRooms(data, room);
+			break;
+		case Choice::SearchFloor:
+			cout << "Enter the Floor:  ";
+			cin >> floor;
+			SearchByFloor (data, floor);
+			break;
+		case Choice::AveragePrices:
+			cout << " Enter how many rooms flat average price you want to know:  ";
+			cin >> room;
+			AveragePrice(data, room);
+			break;
+		}
+		if (choice == Choice::Exit)
+		{
+			break;
+		}
+	}
 	delete[]data;
+}
+int main() {
+	Menu();
+
 	system("pause");
 	return 0;
 }
