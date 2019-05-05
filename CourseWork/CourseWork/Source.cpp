@@ -24,7 +24,37 @@
 #include <string>
 using namespace std;
 int SIZE = 9;
+
+enum ClientChoice
+{
+	Buy, Sell, Exchange
+};
+
+struct Client
+{
+	string telNumber;
+	string clientName;
+	string clientSurname;
+	ClientChoice clientChoice;
+	void ShowClientInfom() {
+		cout << "\n Telephone number:  " << telNumber << "\n Owner:             " << clientName << "   " << clientSurname;
+		switch (clientChoice)
+		{
+		case ClientChoice::Buy:
+			cout << "Buy" << endl;
+			break;
+		case ClientChoice::Sell:
+			cout << "Sell" << endl;
+			break;
+		case ClientChoice::Exchange:
+			cout << "Exchange" << endl;
+			break;
+		}
+	}
+};
+
 struct Address {
+	Client client; // Через дане поле структури ми можемо доступитися до будь якого поля або функції структури Client 
 	string city;
 	string district;
 	string street;
@@ -34,18 +64,21 @@ struct Address {
 	int area;
 	int floor;
 	int price;
-	string telNumber;
-	string ownersName;
-	string ownersSurname;
+
 	void ShowAddress() {
 		cout << "\n City:              " << city << "\n District:          " << district << "\n Street:            " << street << "\n House number:      " << houseNumber;
-		cout << "\n Flat Number:       " << flatNumber << "\n Amount of rooms:   " << roomsAmount << "\n Area:              " << area << "\n Floor:             " << floor;
-		cout << "\n Telephone number:  " << telNumber << "\n Price:             " << price << "\n Owner:             " << ownersName << "   " << ownersSurname;
+		cout << "\n Flat Number:       " << flatNumber << "\n Amount of rooms:   " << roomsAmount << "\n Area:              " << area << "\n Floor:             " << floor << "\n Price:             " << price;
 	}
 };
 
+//void ShowClientInfo(Client client) // Аналог функції ShowClientInfom, яка описана в структурі Client
+//{
+//	cout << "\n Telephone number:  " << client.telNumber << "\n Owner:             " << client.clientName << "   " << client.clientSurname;
+//}
+
+
 void FillAddress(Address*& data) {
-	
+
 	data[0].city = "Rivne";
 	data[0].district = "Northern district";
 	data[0].street = "Shuhevych street ";
@@ -55,9 +88,11 @@ void FillAddress(Address*& data) {
 	data[0].area = 40;
 	data[0].floor = 2;
 	data[0].price = 22000;
-	data[0].telNumber = "067-555-45-45";
-	data[0].ownersName = "Bohdan";
-	data[0].ownersSurname = "Burulka";
+
+	data[0].client.telNumber = "067-555-45-45";
+	data[0].client.clientName = "Bohdan";
+	data[0].client.clientSurname = "Burulka";
+	data[0].client.clientChoice = ClientChoice::Buy;
 
 	data[1].city = "Rivne";
 	data[1].district = "Northern district";
@@ -68,9 +103,12 @@ void FillAddress(Address*& data) {
 	data[1].area = 82;
 	data[1].floor = 5;
 	data[1].price = 32000;
-	data[1].telNumber = "067-444-45-45";
-	data[1].ownersName = "Petryk";
-	data[1].ownersSurname = "Piatochkin";
+
+
+	data[1].client.telNumber = "067-444-45-45";
+	data[1].client.clientName = "Petryk";
+	data[1].client.clientSurname = "Piatochkin";
+	data[1].client.clientChoice = ClientChoice::Sell;
 
 	data[2].city = "Rivne";
 	data[2].district = "Northern district";
@@ -81,9 +119,12 @@ void FillAddress(Address*& data) {
 	data[2].area = 75;
 	data[2].floor = 3;
 	data[2].price = 34000;
-	data[2].telNumber = "067-545-45-45";
-	data[2].ownersName = "Viktoriia";
-	data[2].ownersSurname = "Barabashka";
+
+	data[2].client.telNumber = "067-545-45-45";
+	data[2].client.clientName = "Viktoriia";
+	data[2].client.clientSurname = "Barabashka";
+	data[2].client.clientChoice = ClientChoice::Sell;
+
 
 	data[3].city = "Rivne";
 	data[3].district = "Chaika";
@@ -94,9 +135,12 @@ void FillAddress(Address*& data) {
 	data[3].area = 40;
 	data[3].floor = 2;
 	data[3].price = 25000;
-	data[3].telNumber = "067-333-11-22";
-	data[3].ownersName = "Anna";
-	data[3].ownersSurname = "Anisimova";
+
+	data[3].client.telNumber = "067-333-11-22";
+	data[3].client.clientName = "Anna";
+	data[3].client.clientSurname = "Anisimova";
+	data[3].client.clientChoice = ClientChoice::Buy;
+
 
 	data[4].city = "Rivne";
 	data[4].district = "Chaika";
@@ -107,9 +151,12 @@ void FillAddress(Address*& data) {
 	data[4].area = 54;
 	data[4].floor = 3;
 	data[4].price = 29000;
-	data[4].telNumber = "067-222-22-22";
-	data[4].ownersName = "Iryna";
-	data[4].ownersSurname = "Pavlova";
+
+	data[4].client.telNumber = "067-222-22-22";
+	data[4].client.clientName = "Iryna";
+	data[4].client.clientSurname = "Pavlova";
+	data[4].client.clientChoice = ClientChoice::Buy;
+
 
 	data[5].city = "Rivne";
 	data[5].district = "Chaika";
@@ -120,9 +167,12 @@ void FillAddress(Address*& data) {
 	data[5].area = 48;
 	data[5].floor = 4;
 	data[5].price = 27000;
-	data[5].telNumber = "067-222-11-11";
-	data[5].ownersName = "Myhailo";
-	data[5].ownersSurname = "Kozhumiaka";
+
+	data[5].client.telNumber = "067-222-11-11";
+	data[5].client.clientName = "Myhailo";
+	data[5].client.clientSurname = "Kozhumiaka";
+	data[5].client.clientChoice = ClientChoice::Exchange;
+
 
 	data[6].city = "Rivne";
 	data[6].district = "Center";
@@ -133,9 +183,12 @@ void FillAddress(Address*& data) {
 	data[6].area = 50;
 	data[6].floor = 3;
 	data[6].price = 33000;
-	data[6].telNumber = "095-222-22-22";
-	data[6].ownersName = "Lys";
-	data[6].ownersSurname = "Mykyta";
+
+	data[6].client.telNumber = "095-222-22-22";
+	data[6].client.clientName = "Lys";
+	data[6].client.clientSurname = "Mykyta";
+	data[6].client.clientChoice = ClientChoice::Exchange;
+
 
 	data[7].city = "Rivne";
 	data[7].district = "Center";
@@ -146,9 +199,12 @@ void FillAddress(Address*& data) {
 	data[7].area = 40;
 	data[7].floor = 3;
 	data[7].price = 20000;
-	data[7].telNumber = "050-888-25-25";
-	data[7].ownersName = "Andrii";
-	data[7].ownersSurname = "Velgun";
+
+	data[7].client.telNumber = "050-888-25-25";
+	data[7].client.clientName = "Sophiia";
+	data[7].client.clientSurname = "Duma";
+	data[7].client.clientChoice = ClientChoice::Buy;
+
 
 	data[8].city = "Rivne";
 	data[8].district = "Center";
@@ -159,15 +215,30 @@ void FillAddress(Address*& data) {
 	data[8].area = 80;
 	data[8].floor = 4;
 	data[8].price = 35000;
-	data[8].telNumber = "095-222-22-22";
-	data[8].ownersName = "Sophiia";
-	data[8].ownersSurname = "Duma";
+
+	data[8].client.telNumber = "050-888-77-77";
+	data[8].client.clientName = "Andrii";
+	data[8].client.clientSurname = "Velgun";
+	data[8].client.clientChoice = ClientChoice::Buy;
+}
+
+void ShowAddressForBuy(Address* data)
+{
+	for (int i = 0; i < SIZE; i++)
+	{
+		if (data[i].client.clientChoice == Buy)
+		{
+			data[i].ShowAddress();
+			data[i].client.ShowClientInfom();
+		}
+	}
 }
 
 void PrintAddress(Address* data) {
 	for (int i = 0; i < SIZE; i++) {
 		cout << "Index of property [" << i << "]" << endl;
 		data[i].ShowAddress();
+		data[i].client.ShowClientInfom();
 		cout << "\n===============================================" << endl;
 	}
 }
@@ -184,9 +255,9 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	tempData.roomsAmount = data1.roomsAmount;
 	tempData.area = data1.area;
 	tempData.floor = data1.floor;
-	tempData.telNumber = data1.telNumber;
-	tempData.ownersName = data1.ownersName;
-	tempData.ownersSurname = data1.ownersSurname;
+	tempData.client.telNumber = data1.client.telNumber;
+	tempData.client.clientName = data1.client.clientName;
+	tempData.client.clientSurname = data1.client.clientSurname;
 	tempData.price = data1.price;
 
 	data1.city = data2.city;
@@ -197,9 +268,9 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	data1.roomsAmount = data2.roomsAmount;
 	data1.area = data2.area;
 	data1.floor = data2.floor;
-	data1.telNumber = data2.telNumber;
-	data1.ownersName = data2.ownersName;
-	data1.ownersSurname = data2.ownersSurname;
+	data1.client.telNumber = data2.client.telNumber;
+	data1.client.clientName = data2.client.clientName;
+	data1.client.clientSurname = data2.client.clientSurname;
 	data1.price = data2.price;
 
 	data2.city = tempData.city;
@@ -210,9 +281,9 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	data2.roomsAmount = tempData.roomsAmount;
 	data2.area = tempData.area;
 	data2.floor = tempData.floor;
-	data2.telNumber = tempData.telNumber;
-	data2.ownersName = tempData.ownersName;
-	data2.ownersSurname = tempData.ownersSurname;
+	data2.client.telNumber = tempData.client.telNumber;
+	data2.client.clientName = tempData.client.clientName;
+	data2.client.clientSurname = tempData.client.clientSurname;
 	data2.price = tempData.price;
 }
 
@@ -226,9 +297,9 @@ void CopyAddress(Address& data1, Address data2) // копіює дані з одної змінної A
 	data1.roomsAmount = data2.roomsAmount;
 	data1.area = data2.area;
 	data1.floor = data2.floor;
-	data1.telNumber = data2.telNumber;
-	data1.ownersName = data2.ownersName;
-	data1.ownersSurname = data2.ownersSurname;
+	data1.client.telNumber = data2.client.telNumber;
+	data1.client.clientName = data2.client.clientName;
+	data1.client.clientSurname = data2.client.clientSurname;
 }
 
 void AddNewAddress(Address*& arrData, Address data) // Address *&arrData - вказівник на посилання масиву адрес  // Address data - параметр для введення нової адреси
@@ -262,7 +333,7 @@ void RemoveAddressFromList(Address*& arrData, int index)
 	arrData = newData;
 	SIZE--;
 }
-void EditAddressInformation(Address*& data, int index, Address address)
+void EditAddressInformation(Address * &data, int index, Address address)
 {
 	data[index].city = address.city;
 	data[index].district = address.district;
@@ -272,11 +343,11 @@ void EditAddressInformation(Address*& data, int index, Address address)
 	data[index].roomsAmount = address.roomsAmount;
 	data[index].area = address.area;
 	data[index].floor = address.floor;
-	data[index].telNumber = address.telNumber;
-	data[index].ownersName = address.ownersName;
-	data[index].ownersSurname = address.ownersSurname;
+	data[index].client.telNumber = address.client.telNumber;
+	data[index].client.clientName = address.client.clientName;
+	data[index].client.clientSurname = address.client.clientSurname;
 }
-void SortByDistrict(Address*& data)  // Address*& (тип) - посилання на вказівник на структуру // data - масив нерухомості
+void SortByDistrict(Address * &data)  // Address*& (тип) - посилання на вказівник на структуру // data - масив нерухомості
 {
 	for (int i = 0; i < SIZE - 1; i++) {
 		for (int j = 0; j < SIZE - i - 1; j++)
@@ -289,12 +360,12 @@ void SortByDistrict(Address*& data)  // Address*& (тип) - посилання на вказівник
 		}
 	}
 }
-void SortByOwnersSurname(Address*& data)  // Address*& - посилання на вказівник на структуру // data - масив нерухомості
+void SortByOwnersSurname(Address * &data)  // Address*& - посилання на вказівник на структуру // data - масив нерухомості
 {
 	for (int i = 0; i < SIZE - 1; i++) {
 		for (int j = 0; j < SIZE - i - 1; j++)
 		{
-			if (_strcmpi(data[j].ownersSurname.c_str(), data[j + 1].ownersSurname.c_str()) > 0) // _strcmpi (вбудована ф-я з бібліотеки) порівнює рядки згідно таблиці ASCII
+			if (_strcmpi(data[j].client.clientSurname.c_str(), data[j + 1].client.clientSurname.c_str()) > 0) // _strcmpi (вбудована ф-я з бібліотеки) порівнює рядки згідно таблиці ASCII
 																						// c_str (вбудована ф-я з бібліотеки) переводить string в char* (тому що ф-я _strcmpi не приймає string )
 			{
 				SwapData(data[j], data[j + 1]);
@@ -303,7 +374,7 @@ void SortByOwnersSurname(Address*& data)  // Address*& - посилання на вказівник 
 	}
 }
 
-void SortByPrice(Address*& data) {
+void SortByPrice(Address * &data) {
 	for (int i = 0; i < SIZE - 1; i++)
 	{
 		for (int j = 0; j < SIZE - i - 1; j++)
@@ -315,7 +386,7 @@ void SortByPrice(Address*& data) {
 		}
 	}
 }
-void SortByArea(Address*& data) {
+void SortByArea(Address * &data) {
 	for (int i = 0; i < SIZE - 1; i++)
 	{
 		for (int j = 0; j < SIZE - i - 1; j++)
@@ -327,7 +398,7 @@ void SortByArea(Address*& data) {
 		}
 	}
 }
-void SortByRoomsAmount(Address*& data) {
+void SortByRoomsAmount(Address * &data) {
 	for (int i = 0; i < SIZE - 1; i++)
 	{
 		for (int j = 0; j < SIZE - i - 1; j++)
@@ -339,32 +410,32 @@ void SortByRoomsAmount(Address*& data) {
 		}
 	}
 }
-void SearchByDistrict(Address* data, string district)
+void SearchByDistrict(Address * data, string district)
 {
 	for (int i = 0; i < SIZE; i++) {
 		if (data[i].district.find(district) != string::npos) // Якщо people[i].name не містить name, тоді функція повертає string::npos // find - функція, яка перевіряє наявність строки в строці
 		{
-			data[i].ShowAddress(); 
+			data[i].ShowAddress();
 		}
 	}
 }
-void SearchByRooms(Address* data, int room)
+void SearchByRooms(Address * data, int room)
 {
 	bool isRoom = false;
 	for (int i = 0; i < SIZE; i++) {
-		if (data[i].roomsAmount == room) 
+		if (data[i].roomsAmount == room)
 		{
 			isRoom = true;
 			data[i].ShowAddress();
 			cout << endl << endl;
 		}
 	}
-		if (!isRoom) {
-			cout << " There are no any available " << room << " rooms flats!" << endl;
-		}
-		cout << "----------------------------------------------------" << endl;
+	if (!isRoom) {
+		cout << " There are no any available " << room << " rooms flats!" << endl;
+	}
+	cout << "----------------------------------------------------" << endl;
 }
-void SearchByFloor(Address* data, int floor)
+void SearchByFloor(Address * data, int floor)
 {
 	bool isFloor = false;
 	for (int i = 0; i < SIZE; i++) {
@@ -380,7 +451,7 @@ void SearchByFloor(Address* data, int floor)
 	}
 	cout << "----------------------------------------------------" << endl;
 }
-void AveragePrice(Address* data, int room) {
+void AveragePrice(Address * data, int room) {
 	int roomCounter = 0;
 	int priceSum = 0;
 	for (int i = 0; i < SIZE; i++) {
@@ -395,7 +466,7 @@ void AveragePrice(Address* data, int room) {
 
 void Menu() {
 	enum Choice {
-		FillAndShow = 1, AddNewProperty = 2, DeleteProperty = 3, EditInformation = 4, SortDistrict = 5, SortSurname = 6, SortPrice = 7, SortArea = 8, SearchDistrict = 9, SeachRoomsAmount = 10, SearchFloor = 11, AveragePrices =12, Exit = 0
+		FillAndShow = 1, AddNewProperty = 2, DeleteProperty = 3, EditInformation = 4, SortDistrict = 5, SortSurname = 6, SortPrice = 7, SortArea = 8, SearchDistrict = 9, SeachRoomsAmount = 10, SearchFloor = 11, AveragePrices = 12, Exit = 0
 	};
 	Address* data = new Address[SIZE];
 	string city;
@@ -411,6 +482,7 @@ void Menu() {
 	int price;
 	int index = 0;
 	cout << " Hello! Our real estate agency is ready to help you if you want to buy property or to sell it!\n " << endl;
+
 	FillAddress(data);  // Якщо написати за межами циклу, то масив заповнюється автоматично (щоб покеазати інф-ю - треба викликати ф-ю прінт(її викликаємо в циклі коли потрібно))
 	for (;;)
 	{
@@ -444,13 +516,13 @@ void Menu() {
 			cout << "Enter the floor: ";
 			cin >> tempdata.floor;
 			cout << "Enter the Telephone Number: ";
-			cin >> tempdata.telNumber;
-			cout << "Enter the Owner's Name: ";
-			cin >> tempdata.ownersName;
-			cout << "Enter the Owner's Surname: ";
-			cin >> tempdata.ownersSurname;
+			cin >> tempdata.client.telNumber;
+			cout << "Enter the Client's Name: ";
+			cin >> tempdata.client.clientName;
+			cout << "Enter the Client's Surname: ";
+			cin >> tempdata.client.clientSurname;
 			AddNewAddress(data, tempdata);
-			PrintAddress(data); 
+			PrintAddress(data);
 			break;
 		case Choice::DeleteProperty:
 			cout << " Enter index of data you want to delete:   " << endl;
@@ -478,11 +550,11 @@ void Menu() {
 			cout << "Enter the floor: ";
 			cin >> tempdata.floor;
 			cout << "Enter the Telephone Number: ";
-			cin >> tempdata.telNumber;
-			cout << "Enter the Owner's Name: ";
-			cin >> tempdata.ownersName;
-			cout << "Enter the Owner's Surname: ";
-			cin >> tempdata.ownersSurname;
+			cin >> tempdata.client.telNumber;
+			cout << "Enter the Client's Name: ";
+			cin >> tempdata.client.clientName;
+			cout << "Enter the Client's Surname: ";
+			cin >> tempdata.client.clientSurname;
 			EditAddressInformation(data, index, tempdata); // Назва ф-ї і назва еnum не може збігатися!!!
 			PrintAddress(data);
 			break;
@@ -515,7 +587,7 @@ void Menu() {
 		case Choice::SearchFloor:
 			cout << "Enter the Floor:  ";
 			cin >> floor;
-			SearchByFloor (data, floor);
+			SearchByFloor(data, floor);
 			break;
 		case Choice::AveragePrices:
 			cout << " Enter how many rooms flat average price you want to know:  ";

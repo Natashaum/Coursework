@@ -1,7 +1,7 @@
 ﻿  Source.cpp
-D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(411): warning C4101: 'price': unreferenced local variable
-D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(405): warning C4101: 'flatNumber': unreferenced local variable
-D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(404): warning C4101: 'houseNumber': unreferenced local variable
-D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(406): warning C4101: 'roomsAmount': unreferenced local variable
-D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(407): warning C4101: 'area': unreferenced local variable
+D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(470): warning C4101: 'price': unreferenced local variable
+D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(464): warning C4101: 'flatNumber': unreferenced local variable
+D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(463): warning C4101: 'houseNumber': unreferenced local variable
+D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(465): warning C4101: 'roomsAmount': unreferenced local variable
+D:\Програмування Наташа\Coursework\CourseWork\CourseWork\Source.cpp(466): warning C4101: 'area': unreferenced local variable
   CourseWork.vcxproj -> D:\Програмування Наташа\Coursework\CourseWork\Debug\CourseWork.exe
