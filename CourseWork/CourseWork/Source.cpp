@@ -21,6 +21,7 @@
 // 	         відповідного типу.
 
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 int SIZE = 9;
@@ -79,7 +80,34 @@ struct Address {
 
 void FillAddress(Address*& data) {
 
-	data[0].city = "Rivne";
+	string path = "db.txt";
+	ifstream readFile;
+
+	string tempHouseNumber;
+
+	readFile.open(path);
+	if (!readFile.is_open()) {
+		cout << "Can't open file!" << endl;
+	}
+	else {
+		for (int i = 0; i < SIZE; i++)
+		{
+			readFile >> data[i].city;
+			readFile >> data[i].district;
+			readFile >> data[i].street;
+			readFile >> data[i].houseNumber;
+			readFile >> data[i].flatNumber;
+			readFile >> data[i].roomsAmount;
+			readFile >> data[i].area;
+			readFile >> data[i].floor;
+			readFile >> data[i].client.telNumber;
+			readFile >> data[i].client.clientName;
+			readFile >> data[i].client.clientSurname;
+			readFile >> data[i].price;
+		}
+	}
+	readFile.close();
+	/*data[0].city = "Rivne";
 	data[0].district = "Northern district";
 	data[0].street = "Shuhevych street ";
 	data[0].houseNumber = 2;
@@ -219,7 +247,7 @@ void FillAddress(Address*& data) {
 	data[8].client.telNumber = "050-888-77-77";
 	data[8].client.clientName = "Andrii";
 	data[8].client.clientSurname = "Velgun";
-	data[8].client.clientChoice = ClientChoice::Buy;
+	data[8].client.clientChoice = ClientChoice::Buy;*/
 }
 
 void ShowAddressForBuy(Address* data)
@@ -481,6 +509,10 @@ void Menu() {
 	int room;
 	int price;
 	int index = 0;
+
+	string path = "db.txt";
+	ofstream writeFile;
+
 	cout << " Hello! Our real estate agency is ready to help you if you want to buy property or to sell it!\n " << endl;
 
 	FillAddress(data);  // Якщо написати за межами циклу, то масив заповнюється автоматично (щоб покеазати інф-ю - треба викликати ф-ю прінт(її викликаємо в циклі коли потрібно))
@@ -597,6 +629,29 @@ void Menu() {
 		}
 		if (choice == Choice::Exit)
 		{
+
+			writeFile.open(path);
+			if (!writeFile.is_open()) {
+				cout << "Can't open file!" << endl;
+			}
+			else {
+				for (int i = 0; i < SIZE; i++)
+				{
+					writeFile << data[i].city << endl;
+					writeFile << data[i].district << endl;
+					writeFile << data[i].street << endl;
+					writeFile << data[i].houseNumber << endl;
+					writeFile << data[i].flatNumber << endl;
+					writeFile << data[i].roomsAmount << endl;
+					writeFile << data[i].area << endl;
+					writeFile << data[i].floor << endl;
+					writeFile << data[i].client.telNumber << endl;
+					writeFile << data[i].client.clientName << endl;
+					writeFile << data[i].client.clientSurname << endl;
+					writeFile << data[i].price << endl;
+				}
+			}
+			writeFile.close();
 			break;
 		}
 	}
