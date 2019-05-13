@@ -38,7 +38,7 @@ struct Client
 	string clientSurname;
 	ClientChoice clientChoice;
 	void ShowClientInfom() {
-		cout << "\n Telephone number:  " << telNumber << "\n Owner:             " << clientName << "   " << clientSurname;
+		cout << "\n Telephone number:  " << telNumber << "\n Owner:             " << clientName << "   " << clientSurname << "    ";
 		switch (clientChoice)
 		{
 		case ClientChoice::Buy:
@@ -79,7 +79,7 @@ struct Address {
 
 
 void FillAddress(Address*& data) {
-
+	char temp[255];
 	string path = "db.txt";
 	ifstream readFile;
 
@@ -90,164 +90,42 @@ void FillAddress(Address*& data) {
 		cout << "Can't open file!" << endl;
 	}
 	else {
+		readFile.getline(temp, 255);
+		SIZE = atoi(temp);
+		data = new Address[SIZE];
 		for (int i = 0; i < SIZE; i++)
 		{
-			readFile >> data[i].city;
-			readFile >> data[i].district;
-			readFile >> data[i].street;
-			readFile >> data[i].houseNumber;
-			readFile >> data[i].flatNumber;
-			readFile >> data[i].roomsAmount;
-			readFile >> data[i].area;
-			readFile >> data[i].floor;
-			readFile >> data[i].client.telNumber;
-			readFile >> data[i].client.clientName;
-			readFile >> data[i].client.clientSurname;
-			readFile >> data[i].price;
+			readFile.getline(temp, 255);
+			data[i].city = temp;
+			readFile.getline(temp, 255);
+			data[i].district = temp;
+			readFile.getline(temp, 255);
+			data[i].street = temp;
+			readFile.getline(temp, 255);
+			data[i].houseNumber = atoi(temp);
+			readFile.getline(temp, 255);
+			data[i].flatNumber = atoi(temp);
+			readFile.getline(temp, 255);
+			data[i].roomsAmount = atoi(temp);
+			readFile.getline(temp, 255);
+			data[i].area = atoi(temp);
+			readFile.getline(temp, 255);
+			data[i].floor = atoi(temp);
+			readFile.getline(temp, 255);
+			data[i].client.telNumber = temp;
+			readFile.getline(temp, 255);
+			data[i].client.clientName = temp;
+			readFile.getline(temp, 255);
+			data[i].client.clientSurname = temp;
+			readFile.getline(temp, 255);
+			data[i].client.clientChoice = (ClientChoice)atoi(temp);
+			readFile.getline(temp, 255);
+			data[i].price = atoi(temp);
+			
 		}
 	}
 	readFile.close();
-	/*data[0].city = "Rivne";
-	data[0].district = "Northern district";
-	data[0].street = "Shuhevych street ";
-	data[0].houseNumber = 2;
-	data[0].flatNumber = 25;
-	data[0].roomsAmount = 1;
-	data[0].area = 40;
-	data[0].floor = 2;
-	data[0].price = 22000;
-
-	data[0].client.telNumber = "067-555-45-45";
-	data[0].client.clientName = "Bohdan";
-	data[0].client.clientSurname = "Burulka";
-	data[0].client.clientChoice = ClientChoice::Buy;
-
-	data[1].city = "Rivne";
-	data[1].district = "Northern district";
-	data[1].street = "Shuhevych street ";
-	data[1].houseNumber = 10;
-	data[1].flatNumber = 35;
-	data[1].roomsAmount = 3;
-	data[1].area = 82;
-	data[1].floor = 5;
-	data[1].price = 32000;
-
-
-	data[1].client.telNumber = "067-444-45-45";
-	data[1].client.clientName = "Petryk";
-	data[1].client.clientSurname = "Piatochkin";
-	data[1].client.clientChoice = ClientChoice::Sell;
-
-	data[2].city = "Rivne";
-	data[2].district = "Northern district";
-	data[2].street = "Melnyka street ";
-	data[2].houseNumber = 15;
-	data[2].flatNumber = 115;
-	data[2].roomsAmount = 3;
-	data[2].area = 75;
-	data[2].floor = 3;
-	data[2].price = 34000;
-
-	data[2].client.telNumber = "067-545-45-45";
-	data[2].client.clientName = "Viktoriia";
-	data[2].client.clientSurname = "Barabashka";
-	data[2].client.clientChoice = ClientChoice::Sell;
-
-
-	data[3].city = "Rivne";
-	data[3].district = "Chaika";
-	data[3].street = "Haharin street";
-	data[3].houseNumber = 35;
-	data[3].flatNumber = 46;
-	data[3].roomsAmount = 1;
-	data[3].area = 40;
-	data[3].floor = 2;
-	data[3].price = 25000;
-
-	data[3].client.telNumber = "067-333-11-22";
-	data[3].client.clientName = "Anna";
-	data[3].client.clientSurname = "Anisimova";
-	data[3].client.clientChoice = ClientChoice::Buy;
-
-
-	data[4].city = "Rivne";
-	data[4].district = "Chaika";
-	data[4].street = "Bohoiavlenska street ";
-	data[4].houseNumber = 33;
-	data[4].flatNumber = 18;
-	data[4].roomsAmount = 2;
-	data[4].area = 54;
-	data[4].floor = 3;
-	data[4].price = 29000;
-
-	data[4].client.telNumber = "067-222-22-22";
-	data[4].client.clientName = "Iryna";
-	data[4].client.clientSurname = "Pavlova";
-	data[4].client.clientChoice = ClientChoice::Buy;
-
-
-	data[5].city = "Rivne";
-	data[5].district = "Chaika";
-	data[5].street = "Bohoiavlenska street ";
-	data[5].houseNumber = 22;
-	data[5].flatNumber = 30;
-	data[5].roomsAmount = 2;
-	data[5].area = 48;
-	data[5].floor = 4;
-	data[5].price = 27000;
-
-	data[5].client.telNumber = "067-222-11-11";
-	data[5].client.clientName = "Myhailo";
-	data[5].client.clientSurname = "Kozhumiaka";
-	data[5].client.clientChoice = ClientChoice::Exchange;
-
-
-	data[6].city = "Rivne";
-	data[6].district = "Center";
-	data[6].street = "Soborna street ";
-	data[6].houseNumber = 28;
-	data[6].flatNumber = 14;
-	data[6].roomsAmount = 2;
-	data[6].area = 50;
-	data[6].floor = 3;
-	data[6].price = 33000;
-
-	data[6].client.telNumber = "095-222-22-22";
-	data[6].client.clientName = "Lys";
-	data[6].client.clientSurname = "Mykyta";
-	data[6].client.clientChoice = ClientChoice::Exchange;
-
-
-	data[7].city = "Rivne";
-	data[7].district = "Center";
-	data[7].street = "Drahomanov street ";
-	data[7].houseNumber = 12;
-	data[7].flatNumber = 25;
-	data[7].roomsAmount = 1;
-	data[7].area = 40;
-	data[7].floor = 3;
-	data[7].price = 20000;
-
-	data[7].client.telNumber = "050-888-25-25";
-	data[7].client.clientName = "Sophiia";
-	data[7].client.clientSurname = "Duma";
-	data[7].client.clientChoice = ClientChoice::Buy;
-
-
-	data[8].city = "Rivne";
-	data[8].district = "Center";
-	data[8].street = "Chornovol street";
-	data[8].houseNumber = 1;
-	data[8].flatNumber = 15;
-	data[8].roomsAmount = 3;
-	data[8].area = 80;
-	data[8].floor = 4;
-	data[8].price = 35000;
-
-	data[8].client.telNumber = "050-888-77-77";
-	data[8].client.clientName = "Andrii";
-	data[8].client.clientSurname = "Velgun";
-	data[8].client.clientChoice = ClientChoice::Buy;*/
+	
 }
 
 void ShowAddressForBuy(Address* data)
@@ -286,6 +164,7 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	tempData.client.telNumber = data1.client.telNumber;
 	tempData.client.clientName = data1.client.clientName;
 	tempData.client.clientSurname = data1.client.clientSurname;
+	tempData.client.clientChoice = data1.client.clientChoice;
 	tempData.price = data1.price;
 
 	data1.city = data2.city;
@@ -299,6 +178,7 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	data1.client.telNumber = data2.client.telNumber;
 	data1.client.clientName = data2.client.clientName;
 	data1.client.clientSurname = data2.client.clientSurname;
+	data1.client.clientChoice = data2.client.clientChoice;
 	data1.price = data2.price;
 
 	data2.city = tempData.city;
@@ -312,6 +192,7 @@ void SwapData(Address& data1, Address& data2) // ф-я для зміни місцями даних (дл
 	data2.client.telNumber = tempData.client.telNumber;
 	data2.client.clientName = tempData.client.clientName;
 	data2.client.clientSurname = tempData.client.clientSurname;
+	data2.client.clientChoice = tempData.client.clientChoice;
 	data2.price = tempData.price;
 }
 
@@ -328,6 +209,8 @@ void CopyAddress(Address& data1, Address data2) // копіює дані з одної змінної A
 	data1.client.telNumber = data2.client.telNumber;
 	data1.client.clientName = data2.client.clientName;
 	data1.client.clientSurname = data2.client.clientSurname;
+	data1.client.clientChoice = data2.client.clientChoice;
+	data1.price = data2.price;
 }
 
 void AddNewAddress(Address*& arrData, Address data) // Address *&arrData - вказівник на посилання масиву адрес  // Address data - параметр для введення нової адреси
@@ -374,6 +257,8 @@ void EditAddressInformation(Address * &data, int index, Address address)
 	data[index].client.telNumber = address.client.telNumber;
 	data[index].client.clientName = address.client.clientName;
 	data[index].client.clientSurname = address.client.clientSurname;
+	data[index].client.clientChoice = address.client.clientChoice;
+	data[index].price = address.price;
 }
 void SortByDistrict(Address * &data)  // Address*& (тип) - посилання на вказівник на структуру // data - масив нерухомості
 {
@@ -475,7 +360,7 @@ void SearchByFloor(Address * data, int floor)
 		}
 	}
 	if (!isFloor) {
-		cout << " There are no any available rooms on" << floor << " flat!" << endl;
+		cout << " There are no any available rooms on the  " << floor << " flats!" << endl;
 	}
 	cout << "----------------------------------------------------" << endl;
 }
@@ -496,7 +381,7 @@ void Menu() {
 	enum Choice {
 		FillAndShow = 1, AddNewProperty = 2, DeleteProperty = 3, EditInformation = 4, SortDistrict = 5, SortSurname = 6, SortPrice = 7, SortArea = 8, SearchDistrict = 9, SeachRoomsAmount = 10, SearchFloor = 11, AveragePrices = 12, Exit = 0
 	};
-	Address* data = new Address[SIZE];
+	Address* data;
 	string city;
 	string district;
 	string street;
@@ -508,6 +393,7 @@ void Menu() {
 	int choice;
 	int room;
 	int price;
+	int tempInt;
 	int index = 0;
 
 	string path = "db.txt";
@@ -553,6 +439,11 @@ void Menu() {
 			cin >> tempdata.client.clientName;
 			cout << "Enter the Client's Surname: ";
 			cin >> tempdata.client.clientSurname;
+			cout << "Enter the Client's Choice (0 to buy, 1 to sale, 2 to exchange): ";
+			cin >> tempInt;
+			tempdata.client.clientChoice = (ClientChoice)tempInt;
+			cout << "Enter the price: ";
+			cin >> tempdata.price;
 			AddNewAddress(data, tempdata);
 			PrintAddress(data);
 			break;
@@ -587,6 +478,11 @@ void Menu() {
 			cin >> tempdata.client.clientName;
 			cout << "Enter the Client's Surname: ";
 			cin >> tempdata.client.clientSurname;
+			cout << "Enter the Client's Choice (0 to buy, 1 to sale, 2 to exchange): ";
+			cin >> tempInt;
+			tempdata.client.clientChoice = (ClientChoice)tempInt;
+			cout << "Enter the price: ";
+			cin >> tempdata.price;
 			EditAddressInformation(data, index, tempdata); // Назва ф-ї і назва еnum не може збігатися!!!
 			PrintAddress(data);
 			break;
@@ -629,12 +525,12 @@ void Menu() {
 		}
 		if (choice == Choice::Exit)
 		{
-
 			writeFile.open(path);
 			if (!writeFile.is_open()) {
 				cout << "Can't open file!" << endl;
 			}
 			else {
+				writeFile << SIZE << endl;
 				for (int i = 0; i < SIZE; i++)
 				{
 					writeFile << data[i].city << endl;
@@ -648,6 +544,7 @@ void Menu() {
 					writeFile << data[i].client.telNumber << endl;
 					writeFile << data[i].client.clientName << endl;
 					writeFile << data[i].client.clientSurname << endl;
+					writeFile << data[i].client.clientChoice << endl;
 					writeFile << data[i].price << endl;
 				}
 			}
